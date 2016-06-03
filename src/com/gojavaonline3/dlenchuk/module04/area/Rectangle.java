@@ -46,6 +46,23 @@ public class Rectangle extends TwoDimensionalFigure {
         if (sideB.getLength() != sideD.getLength()) {
             throw new IllegalArgumentException("Such rectangle can not be created\nCause: 'Side BC !=  Side AD'");
         }
+        double cosA =
+                ((pointB.getX() - pointA.getX()) * (pointD.getX() - pointA.getX()) + (pointB.getY() - pointA.getY()) * (pointD.getY() - pointA.getY()))
+                        /
+                        (Math.sqrt((pointB.getX() - pointA.getX()) * (pointB.getX() - pointA.getX()) + (pointB.getY() - pointA.getY()) * (pointB.getY() - pointA.getY())) *
+                                Math.sqrt((pointD.getX() - pointA.getX()) * (pointD.getX() - pointA.getX()) + (pointD.getY() - pointA.getY()) * (pointD.getY() - pointA.getY())));
+        if (cosA != 0) {
+            throw new IllegalArgumentException("Such rectangle can not be created\nCause: 'The angle BAD is not 90 degree");
+        }
+        double cosC =
+                ((pointB.getX() - pointC.getX()) * (pointD.getX() - pointC.getX()) + (pointB.getY() - pointC.getY()) * (pointD.getY() - pointC.getY()))
+                        /
+                        (Math.sqrt((pointB.getX() - pointC.getX()) * (pointB.getX() - pointC.getX()) + (pointB.getY() - pointC.getY()) * (pointB.getY() - pointC.getY())) *
+                                Math.sqrt((pointD.getX() - pointC.getX()) * (pointD.getX() - pointC.getX()) + (pointD.getY() - pointC.getY()) * (pointD.getY() - pointC.getY())));
+
+        if (cosC != 0) {
+            throw new IllegalArgumentException("Such rectangle can not be created\nCause: 'The angle BCD is not 90 degree");
+        }
     }
 
     @Override
