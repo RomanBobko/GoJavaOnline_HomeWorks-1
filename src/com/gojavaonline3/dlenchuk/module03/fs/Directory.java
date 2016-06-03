@@ -1,7 +1,6 @@
 package com.gojavaonline3.dlenchuk.module03.fs;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -13,14 +12,14 @@ public class Directory extends File {
     private final List<File> files = new ArrayList<>();
 
 
-    public Directory(String name) {
+    Directory(String name) {
         super(name);
         System.out.println("Directory '" + this.getName() + "' has been created");
     }
 
-    public File getFile(String name) {
+    public File file(String name) {
         int index = indexOf(name);
-        return index >= 0 ? getFile(index) : null;
+        return index >= 0 ? file(index) : null;
     }
 
     public int indexOf(String name) {
@@ -32,7 +31,7 @@ public class Directory extends File {
         return -1;
     }
 
-    public File getFile(int index) {
+    public File file(int index) {
         return files.get(index);
     }
 
@@ -45,15 +44,7 @@ public class Directory extends File {
     }
 
     public boolean delete(String name) {
-        File file = getFile(name);
-        if (file == null) {
-            return false;
-        }
-        if (files.remove(file)) {
-            System.out.println("Item '" + name + "' has been deleted from Directory '" + this.getName() + "'");
-            return true;
-        }
-        return false;
+        return delete(file(name));
     }
 
     public boolean delete(File file) {
@@ -75,39 +66,30 @@ public class Directory extends File {
 
     @Override
     public void open() {
-        open(0);
+        for (File file : files) {
+            System.out.println(file);
+        }
     }
 
     public void open(int level) {
-        if (level == 0) {
-            System.out.println("Opening Directory '" + getName() + "'..." + (files.size() == 0 ? " is Empty" : ""));
-        }
-        for (File file : files) {
-            char[] spaces = new char[level * 3];
-            Arrays.fill(spaces, ' ');
-            System.out.println(new String(spaces) + "|__" + file);
-            if (file instanceof Directory) {
-                file.open(level + 1);
-            }
-        }
     }
 
     public void copy(File file) throws Exception {
-        if (isDeadLock(file)) {
-            throw new Exception("Dead Lock Exception");
+        if (hasCircleChain(file)) {
+            throw new Exception("Circle Chain Exception");
         }
         File newFile = file.clone();
         files.add(newFile);
     }
 
-    private boolean isDeadLock(File file) {
+    private boolean hasCircleChain(File file) {
         if (this == file) {
             return true;
         }
         if (file instanceof Directory) {
             boolean result;
-            for (int i = 0; i < ((Directory)file).getFileCount(); i++) {
-                result = isDeadLock(((Directory) file).getFile(i));
+            for (int i = 0; i < ((Directory)file).fileCount(); i++) {
+                result = hasCircleChain(((Directory) file).file(i));
                 if (result) {
                     return true;
                 }
@@ -116,7 +98,7 @@ public class Directory extends File {
         return false;
     }
 
-    public int getFileCount() {
+    public int fileCount() {
         return files.size();
     }
 

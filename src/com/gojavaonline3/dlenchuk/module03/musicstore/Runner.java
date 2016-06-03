@@ -32,13 +32,13 @@ public class Runner {
 
         System.out.println();
         System.out.println("Instruments are configuring...");
-        store.get(10).play("Rahmaninov Simph.#1 for piano");
-        store.get(9).play("Romans");
-        store.get(4).play("Get up");
+        store.item(10).play("Rahmaninov Simph.#1 for piano");
+        store.item(9).play("Romans");
+        store.item(4).play("Get up");
 
         try {
             System.out.print("Playing not existed item... ");
-            store.get(4000).play("Get up");
+            store.item(4000).play("Get up");
         } catch (NullPointerException e) {
             System.out.println(e);
         }

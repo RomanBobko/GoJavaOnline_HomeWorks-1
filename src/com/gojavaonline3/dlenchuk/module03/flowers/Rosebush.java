@@ -10,26 +10,22 @@ import java.util.List;
  */
 public class Rosebush {
 
-    /* ToDo
-    * Все таки, Дима, какую типизацию тут лучше применить?
-    * 1. С одной стороны, если подойти формально - нужно применять List<Rose>
-    * 2. С другой - List<Flower> удобнее в плане реализации (используется абстрактный клас =>
-    *    все прелести полиморфизма), причем в данные ошибки не смогут забраться (типа на
-    *    розовом кусте вдруг откуда не возьмись выросла ромашка:)), т.к. внешний доступ к
-    *    особенностям воспроизводства куста закрыт
-    */
-    private List<Flower> roses = new ArrayList<>();
+    private List<Rose> roses = new ArrayList<>();
 
     private final Color color;
-    private final boolean hasSmell;
+    private final boolean smelled;
 
-    public Rosebush(Color color, boolean hasSmell) {
+    Rosebush(Color color, boolean smelled) {
         this.color = color;
-        this.hasSmell = hasSmell;
+        this.smelled = smelled;
     }
 
     public void grow() {
-        Iterator<Flower> iterator = roses.iterator();
+        if (roses.size() == 0) {
+            birth();
+            return;
+        }
+        Iterator<Rose> iterator = roses.iterator();
         while (iterator.hasNext()) {
             Flower rose = iterator.next();
             rose.setHeight(rose.getHeight() + (int)(Math.random()*40));
@@ -47,21 +43,24 @@ public class Rosebush {
                     iterator.remove();
             }
         }
+    }
+
+    public void birth() {
         int newRosesCount = (int)(Math.random()*5);
         for (int i = 0; i < newRosesCount; i++) {
-            roses.add(new Rose(color, (int)(Math.random()*60), hasSmell, State.SPROUT));
+            roses.add(new Rose(color, (int)(Math.random()*60), smelled, State.SPROUT));
         }
     }
 
     public List<Flower> trim() {
-        List<Flower> roses = new ArrayList<Flower>(this.roses);
+        List<Flower> roses = new ArrayList<>(this.roses);
         this.roses.clear();
         return roses;
     }
 
     public List<Flower> trim(State state, int height) {
         List<Flower> roses = new ArrayList<>();
-        Iterator<Flower> iterator = this.roses.iterator();
+        Iterator<Rose> iterator = this.roses.iterator();
         while (iterator.hasNext()) {
             Flower rose = iterator.next();
             if (rose.getState() == state && rose.getHeight() >= height) {
@@ -77,7 +76,7 @@ public class Rosebush {
     public String toString() {
         return "Rosebush{" +
                 "color=" + color +
-                ", hasSmell=" + hasSmell +
+                ", smelled=" + smelled +
                 ", roses=" + roses +
                 '}';
     }

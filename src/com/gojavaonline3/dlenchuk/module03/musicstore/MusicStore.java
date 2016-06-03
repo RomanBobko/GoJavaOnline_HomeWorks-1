@@ -26,7 +26,7 @@ public class MusicStore {
         return false;
     }
 
-    public MusicalInstrument get(int id) {
+    public MusicalInstrument item(int id) {
         int index = indexOf(id);
         return index >= 0 ? musicalInstruments.get(index) : null;
     }
@@ -41,8 +41,8 @@ public class MusicStore {
     }
 
     public boolean remove(int id) {
-        String item = get(indexOf(id)).toString();
-        if (musicalInstruments.remove(get(indexOf(id)))) {
+        String item = item(indexOf(id)).toString();
+        if (musicalInstruments.remove(item(indexOf(id)))) {
             System.out.println("Item " + item + " has been removed");
             return true;
         }
@@ -60,10 +60,10 @@ public class MusicStore {
             System.out.println(musicalInstrument);
         }
         System.out.println("=============================================================================");
-        System.out.println("Total amount: $" + getTotalAmount());
+        System.out.println("Total amount: $" + totalAmount());
     }
 
-    public int getTotalAmount() {
+    public int totalAmount() {
         int result = 0;
         for (MusicalInstrument musicalInstrument : musicalInstruments) {
             result += musicalInstrument.getPrice();

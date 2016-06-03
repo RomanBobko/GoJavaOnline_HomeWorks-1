@@ -52,8 +52,8 @@ public class Runner {
         System.out.println();
         System.out.println(bouquetOfOpenedRoses);
         System.out.println("Remove flower from center...");
-        if (bouquetOfOpenedRoses.getSize() > 0) {
-            bouquetOfOpenedRoses.remove((int)(bouquetOfOpenedRoses.getSize()/2));
+        if (bouquetOfOpenedRoses.size() > 0) {
+            bouquetOfOpenedRoses.remove((int)(bouquetOfOpenedRoses.size()/2));
         }
         System.out.println(bouquetOfOpenedRoses);
     }

@@ -8,7 +8,7 @@ import java.util.GregorianCalendar;
  */
 public class Piano extends MusicalInstrument {
 
-    public Piano(int id, String producedBy, GregorianCalendar manufactureDate, int price) {
+    Piano(int id, String producedBy, GregorianCalendar manufactureDate, int price) {
         super(id, producedBy, manufactureDate, Kind.KEYBOARDS, price);
     }
 

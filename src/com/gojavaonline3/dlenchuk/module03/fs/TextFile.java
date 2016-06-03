@@ -8,7 +8,7 @@ import java.util.Arrays;
  */
 public class TextFile extends File {
 
-    public TextFile(String name) {
+    TextFile(String name) {
         super(name);
         System.out.println("Text File '" + this.getName() + "' has been created");
     }

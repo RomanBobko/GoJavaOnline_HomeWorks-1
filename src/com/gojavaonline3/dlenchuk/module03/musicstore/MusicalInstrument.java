@@ -9,6 +9,14 @@ import java.util.GregorianCalendar;
  */
 public abstract class MusicalInstrument {
 
+    public static enum Kind {
+        KEYBOARDS,
+        WINDS,
+        STRINGED,
+        NAN
+    }
+
+
     private final int id;
     private final String producedBy;
     private final GregorianCalendar manufactureDate;
@@ -16,7 +24,7 @@ public abstract class MusicalInstrument {
     private final int price;
 
 
-    public MusicalInstrument(int id, String producedBy, GregorianCalendar manufactureDate, Kind kind, int price) {
+    MusicalInstrument(int id, String producedBy, GregorianCalendar manufactureDate, Kind kind, int price) {
         this.id = id;
         this.producedBy = producedBy;
         this.manufactureDate = manufactureDate;

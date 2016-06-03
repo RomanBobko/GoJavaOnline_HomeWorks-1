@@ -6,6 +6,7 @@ package com.gojavaonline3.dlenchuk.module03.fs;
  */
 public class Runner {
     public static void main(String[] args) throws CloneNotSupportedException {
+
         Directory rootDir = new Directory("/");
 
         rootDir.add(new Directory("etc"));
@@ -18,13 +19,14 @@ public class Runner {
         rootDir.add(new TextFile("license"));
 
         System.out.println();
+        System.out.println("Opening Directory '" + rootDir + "'..." + (rootDir.fileCount() == 0 ? " is Empty" : ""));
         rootDir.open();
 
         System.out.println();
         System.out.println();
-        Directory homeDir = (Directory) (rootDir.getFile("home"));
+        Directory homeDir = (Directory) (rootDir.file("home"));
         homeDir.add(new Directory("user1"));
-        Directory userDir = (Directory) rootDir.getFile("home").getFile("user1");
+        Directory userDir = (Directory) (homeDir.file("user1"));
         userDir.add(new ImageFile("avatar.jpg"));
         userDir.add(new ImageFile("fingerprint1.jpg"));
         userDir.add(new ImageFile("fingerprint2.jpg"));
@@ -37,49 +39,56 @@ public class Runner {
         userDir.add(new AudioFile("voice_sample4.mp3"));
 
         System.out.println();
-        rootDir.open();
+        System.out.println("Opening Directory '" + userDir + "'..." + (userDir.fileCount() == 0 ? " is Empty" : ""));
+        userDir.open();
 
         System.out.println();
         System.out.println();
         userDir.setName("user2");
 
         System.out.println();
-        rootDir.open();
+        System.out.println("Opening Directory '" + userDir + "'..." + (userDir.fileCount() == 0 ? " is Empty" : ""));
+        userDir.open();
 
 
         System.out.println();
         System.out.println("Coping directory '/' to '/etc'...");
+        Directory etcDir = (Directory) rootDir.file("etc");
         try {
-            ((Directory)(rootDir.getFile("etc"))).copy(rootDir);
+            etcDir.copy(rootDir);
         } catch (Exception e) {
             System.out.println(e);
         }
-        rootDir.open();
+        System.out.println("Opening Directory '" + etcDir + "'..." + (etcDir.fileCount() == 0 ? " is Empty" : ""));
+        etcDir.open();
 
         System.out.println();
         System.out.println("Coping directory '/user2' to '/etc'...");
         try {
-            ((Directory)(rootDir.getFile("etc"))).copy(userDir);
+            etcDir.copy(userDir);
         } catch (Exception e) {
             System.out.println(e);
         }
-        rootDir.open();
+        System.out.println("Opening Directory '" + etcDir + "'..." + (etcDir.fileCount() == 0 ? " is Empty" : ""));
+        etcDir.open();
 
         System.out.println();
         System.out.println("Moving directory...");
-        rootDir.move(rootDir.getFile("etc"), (Directory) (rootDir.getFile("opt")));
-        rootDir.open();
+        Directory optDir = (Directory) (rootDir.file("opt"));
+        rootDir.move(etcDir, optDir);
+        System.out.println("Opening Directory '" + optDir + "'..." + (optDir.fileCount() == 0 ? " is Empty" : ""));
+        optDir.open();
 
         System.out.println();
         System.out.println();
-        rootDir.getFile("license").open();
-        userDir.getFile("fingerprint2.jpg").open();
-        userDir.getFile("voice_sample3.mp3").open();
+        rootDir.file("license").open();
+        userDir.file("fingerprint2.jpg").open();
+        userDir.file("voice_sample3.mp3").open();
 
         System.out.println();
         try {
             System.out.print("Opening not existed file... ");
-            rootDir.getFile("not existed file").open();
+            rootDir.file("not existed file").open();
         } catch (NullPointerException e) {
             System.out.println(e);
         }
@@ -89,6 +98,7 @@ public class Runner {
         rootDir.delete("home");
 
         System.out.println();
+        System.out.println("Opening Directory '" + rootDir + "'..." + (rootDir.fileCount() == 0 ? " is Empty" : ""));
         rootDir.open();
 
         System.out.println();
@@ -96,6 +106,7 @@ public class Runner {
         rootDir.clear();
 
         System.out.println();
+        System.out.println("Opening Directory '" + rootDir + "'..." + (rootDir.fileCount() == 0 ? " is Empty" : ""));
         rootDir.open();
 
     }

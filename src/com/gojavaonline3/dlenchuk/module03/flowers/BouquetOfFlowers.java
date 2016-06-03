@@ -8,6 +8,7 @@ import java.util.List;
  *
  */
 public class BouquetOfFlowers {
+
     private final List<Flower> flowers = new ArrayList<>();
 
     public boolean add(Flower flower) {
@@ -18,11 +19,11 @@ public class BouquetOfFlowers {
         return flowers.remove(index);
     }
 
-    public Flower get(int index) {
+    public Flower flower(int index) {
         return flowers.get(index);
     }
 
-    public int getSize() {
+    public int size() {
         return flowers.size();
     }
 

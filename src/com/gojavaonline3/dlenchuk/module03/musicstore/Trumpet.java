@@ -8,7 +8,7 @@ import java.util.GregorianCalendar;
  */
 public class Trumpet extends MusicalInstrument {
 
-    public Trumpet(int id, String producedBy, GregorianCalendar manufactureDate, int price) {
+    Trumpet(int id, String producedBy, GregorianCalendar manufactureDate, int price) {
         super(id, producedBy, manufactureDate, Kind.WINDS, price);
     }
 

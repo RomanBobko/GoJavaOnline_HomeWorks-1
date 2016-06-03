@@ -8,7 +8,7 @@ import java.util.GregorianCalendar;
  */
 public class Guitar extends MusicalInstrument {
 
-    public Guitar(int id, String producedBy, GregorianCalendar manufactureDate, int price) {
+    Guitar(int id, String producedBy, GregorianCalendar manufactureDate, int price) {
         super(id, producedBy, manufactureDate, Kind.STRINGED, price);
     }
 

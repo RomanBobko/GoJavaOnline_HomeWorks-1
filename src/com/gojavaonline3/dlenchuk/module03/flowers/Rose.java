@@ -5,7 +5,7 @@ package com.gojavaonline3.dlenchuk.module03.flowers;
  *
  */
 public class Rose extends Flower {
-    public Rose(Color color, int height, boolean hasSmell, State state) {
+    Rose(Color color, int height, boolean hasSmell, State state) {
         super(color, height, hasSmell, state);
     }
 }

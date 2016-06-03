@@ -4,10 +4,10 @@ package com.gojavaonline3.dlenchuk.module03.fs;
  * Created by Dmitrij Lenchuk on 01.06.2016.
  * Abstract Class File
  */
-public abstract class File implements Cloneable /*Дима, это для копирования файлов*/ {
+public abstract class File implements Cloneable {
     private String name;
 
-    public File(String name) {
+    File(String name) {
         this.name = name;
     }
 
@@ -24,10 +24,6 @@ public abstract class File implements Cloneable /*Дима, это для коп
 
     public abstract void open(int level);
 
-    public File getFile(String name) {
-        return name == null || this.name.equals(name) ? this : null;
-    }
-
     public File clone() throws CloneNotSupportedException {
         return (File) super.clone();
     }
@@ -35,17 +31,18 @@ public abstract class File implements Cloneable /*Дима, это для коп
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (!(o instanceof File)) return false;
 
         File file = (File) o;
 
-        return name.equals(file.name);
+        if (name != null ? !name.equals(file.name) : file.name != null) return false;
 
+        return true;
     }
 
     @Override
     public int hashCode() {
-        return name.hashCode();
+        return name != null ? name.hashCode() : 0;
     }
 
     @Override

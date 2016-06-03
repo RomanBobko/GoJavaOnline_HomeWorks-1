@@ -7,7 +7,8 @@ import java.util.Arrays;
  * Class Audio File
  */
 public class AudioFile extends File{
-    public AudioFile(String name) {
+
+    AudioFile(String name) {
         super(name);
         System.out.println("Audio File '" + this.getName() + "' has been created");
     }

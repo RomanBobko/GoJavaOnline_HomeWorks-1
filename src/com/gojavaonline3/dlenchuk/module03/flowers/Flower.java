@@ -6,14 +6,14 @@ package com.gojavaonline3.dlenchuk.module03.flowers;
  */
 public abstract class Flower {
     private final Color color;
-    private final boolean hasSmell;
+    private final boolean smelled;
     private int height;
     private State state;
 
-    public Flower(Color color, int height, boolean hasSmell, State state) {
+    Flower(Color color, int height, boolean smelled, State state) {
         this.color = color;
         this.height = height;
-        this.hasSmell = hasSmell;
+        this.smelled = smelled;
         this.state = state;
     }
 
@@ -21,12 +21,8 @@ public abstract class Flower {
         return color;
     }
 
-    public int getHeight() {
-        return height;
-    }
-
-    public boolean hasSmell() {
-        return hasSmell;
+    public boolean isSmelled() {
+        return smelled;
     }
 
     public State getState() {
@@ -37,12 +33,16 @@ public abstract class Flower {
         this.state = state;
     }
 
+    public int getHeight() {
+        return height;
+    }
+
     public void setHeight(int height) {
         this.height = height;
     }
 
     @Override
     public String toString() {
-        return this.getClass().getSimpleName()+ '{' + color + ", " + height + ", " + (hasSmell ? "has smell" : "hasn't smell") + ", " + state + '}';
+        return this.getClass().getSimpleName()+ '{' + color + ", " + height + ", " + (smelled ? "has smell" : "hasn't smell") + ", " + state + '}';
     }
 }

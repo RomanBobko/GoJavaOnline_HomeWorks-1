@@ -7,7 +7,7 @@ import java.util.Arrays;
  * Class Image File
  */
 public class ImageFile extends File{
-    public ImageFile(String name) {
+    ImageFile(String name) {
         super(name);
         System.out.println("Image File '" + this.getName() + "' has been created");
     }
