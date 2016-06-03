@@ -16,7 +16,7 @@ public class Triangle extends TwoDimensionalFigure{
     private final Line sideB;
     private final Line sideC;
 
-    public Triangle(Point pointA, Point pointB, Point pointC) throws IllegalArgumentException {
+    Triangle(Point pointA, Point pointB, Point pointC) throws IllegalArgumentException {
         this.pointA = pointA;
         this.pointB = pointB;
         this.pointC = pointC;
@@ -53,9 +53,9 @@ public class Triangle extends TwoDimensionalFigure{
     @Override
     public double getArea() {
         if (!isCalculated) {
-            double a = sideA.getLength();
-            double b = sideB.getLength();
-            double c = sideC.getLength();
+            double a = sideA.length();
+            double b = sideB.length();
+            double c = sideC.length();
             double p = (a + b + c) / 2;
 
             area = Math.sqrt(p * (p - a) * (p - b) * (p - c));
@@ -67,9 +67,9 @@ public class Triangle extends TwoDimensionalFigure{
 
     @Override
     public void checkExists() throws IllegalArgumentException {
-        double a = sideA.getLength();
-        double b = sideB.getLength();
-        double c = sideC.getLength();
+        double a = sideA.length();
+        double b = sideB.length();
+        double c = sideC.length();
 
         if (a <= 0 || b <= 0 || c <= 0) {
             throw new IllegalArgumentException("Such triangle can not be created\nCause: '" + (a <= 0 ? "a <= 0" : b <= 0 ? "b <= 0" : "c <= 0") + "'");

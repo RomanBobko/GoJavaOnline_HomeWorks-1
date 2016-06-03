@@ -11,7 +11,7 @@ public class Circle extends TwoDimensionalFigure{
     private final Point center;
     private final int radius;
 
-    public Circle(Point center, int radius) {
+    Circle(Point center, int radius) {
         this.center = center;
         this.radius = radius;
         checkExists();

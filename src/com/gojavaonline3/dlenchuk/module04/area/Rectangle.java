@@ -18,7 +18,7 @@ public class Rectangle extends TwoDimensionalFigure {
     private final Line sideC;
     private final Line sideD;
 
-    public Rectangle(Point pointA, Point pointB, Point pointC, Point pointD) throws IllegalArgumentException {
+    Rectangle(Point pointA, Point pointB, Point pointC, Point pointD) throws IllegalArgumentException {
         this.pointA = pointA;
         this.pointB = pointB;
         this.pointC = pointC;
@@ -30,20 +30,36 @@ public class Rectangle extends TwoDimensionalFigure {
         checkExists();
     }
 
+    public Point getPointA() {
+        return pointA;
+    }
+
+    public Point getPointB() {
+        return pointB;
+    }
+
+    public Point getPointC() {
+        return pointC;
+    }
+
+    public Point getPointD() {
+        return pointD;
+    }
+
     @Override
     public double getArea() {
-        return this.sideA.getLength() * this.sideB.getLength();
+        return this.sideA.length() * this.sideB.length();
     }
 
     @Override
     public void checkExists() throws IllegalArgumentException {
-        if (new Line(pointA, pointC).getLength() != new Line(pointB, pointD).getLength()) {
+        if (new Line(pointA, pointC).length() != new Line(pointB, pointD).length()) {
             throw new IllegalArgumentException("Such rectangle can not be created\nCause: 'Side AC !=  Side BD'");
         }
-        if (sideA.getLength() != sideC.getLength()) {
+        if (sideA.length() != sideC.length()) {
             throw new IllegalArgumentException("Such rectangle can not be created\nCause: 'Side AB !=  Side CD'");
         }
-        if (sideB.getLength() != sideD.getLength()) {
+        if (sideB.length() != sideD.length()) {
             throw new IllegalArgumentException("Such rectangle can not be created\nCause: 'Side BC !=  Side AD'");
         }
         double cosA =
