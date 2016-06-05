@@ -27,9 +27,9 @@ public class Circle extends TwoDimensionalFigure{
 
     @Override
     public double getArea() {
-        if (!isCalculated) {
+        if (!calculated) {
             area = Math.PI*radius*radius;
-            isCalculated = true;
+            calculated = true;
         }
         return area;
     }

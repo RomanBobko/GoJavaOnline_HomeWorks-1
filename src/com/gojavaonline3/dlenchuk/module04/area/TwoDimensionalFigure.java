@@ -7,7 +7,7 @@ package com.gojavaonline3.dlenchuk.module04.area;
 public abstract class TwoDimensionalFigure {
 
     protected double area;
-    protected boolean isCalculated = false; //Дима, у нас в спор в группе был, стоит ли делать такую проверку?..
+    protected boolean calculated = false; //Дима, у нас в спор в группе был, стоит ли делать такую проверку?..
 
     public abstract double getArea();
 

@@ -7,7 +7,7 @@ package com.gojavaonline3.dlenchuk.module04.distance;
 public class Line {
     private final Point point1;
     private final Point point2;
-    private boolean isCalculated = false;
+    private boolean calculated = false;
     private double length;
 
     public Line(Point point1, Point point2) {
@@ -29,10 +29,10 @@ public class Line {
     }
 
     public double length() {
-        if (!isCalculated) {
+        if (!calculated) {
             length = Math.sqrt((point2.getX() - point1.getX())*(point2.getX() - point1.getX()) +
                                (point2.getY() - point1.getY())*(point2.getY() - point1.getY()));
-            isCalculated = true;
+            calculated = true;
         }
         return length;
     }

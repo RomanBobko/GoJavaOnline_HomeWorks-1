@@ -52,7 +52,7 @@ public class Triangle extends TwoDimensionalFigure{
 
     @Override
     public double getArea() {
-        if (!isCalculated) {
+        if (!calculated) {
             double a = sideA.length();
             double b = sideB.length();
             double c = sideC.length();
@@ -60,7 +60,7 @@ public class Triangle extends TwoDimensionalFigure{
 
             area = Math.sqrt(p * (p - a) * (p - b) * (p - c));
 
-            isCalculated = true;
+            calculated = true;
         }
         return area;
     }
