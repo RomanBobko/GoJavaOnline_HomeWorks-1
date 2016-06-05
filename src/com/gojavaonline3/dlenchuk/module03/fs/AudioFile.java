@@ -18,11 +18,4 @@ public class AudioFile extends File{
         System.out.println("Audio File '" + getName() + "' has been opened");
     }
 
-    @Override
-    public void open(int level) {
-        char[] spaces = new char[level*4];
-        Arrays.fill(spaces, ' ');
-        System.out.println(new String(spaces) + "Audio File '" + getName() + "' has been opened");
-    }
-
 }

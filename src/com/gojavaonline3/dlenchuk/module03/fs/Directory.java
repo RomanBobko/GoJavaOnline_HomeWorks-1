@@ -71,9 +71,6 @@ public class Directory extends File {
         }
     }
 
-    public void open(int level) {
-    }
-
     public void copy(File file) throws Exception {
         if (hasCircleChain(file)) {
             throw new Exception("Circle Chain Exception");

@@ -17,11 +17,4 @@ public class ImageFile extends File{
         System.out.println("Image File '" + getName() + "' has been opened");
     }
 
-    @Override
-    public void open(int level) {
-        char[] spaces = new char[level*4];
-        Arrays.fill(spaces, ' ');
-        System.out.println(new String(spaces) + "Image File '" + getName() + "' has been opened");
-    }
-
 }

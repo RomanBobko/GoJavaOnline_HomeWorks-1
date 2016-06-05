@@ -18,11 +18,4 @@ public class TextFile extends File {
         System.out.println("Text File '" + getName() + "' has been opened");
     }
 
-    @Override
-    public void open(int level) {
-        char[] spaces = new char[level*4];
-        Arrays.fill(spaces, ' ');
-        System.out.println(new String(spaces) + "Text File '" + getName() + "' has been opened");
-    }
-
 }

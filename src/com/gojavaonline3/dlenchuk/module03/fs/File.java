@@ -22,8 +22,6 @@ public abstract class File implements Cloneable {
 
     public abstract void open();
 
-    public abstract void open(int level);
-
     public File clone() throws CloneNotSupportedException {
         return (File) super.clone();
     }

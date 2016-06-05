@@ -27,7 +27,7 @@ public class Rosebush {
         }
         Iterator<Rose> iterator = roses.iterator();
         while (iterator.hasNext()) {
-            Flower rose = iterator.next();
+            Rose rose = iterator.next();
             rose.setHeight(rose.getHeight() + (int)(Math.random()*40));
             switch (rose.getState()) {
                 case SPROUT:
@@ -62,7 +62,7 @@ public class Rosebush {
         List<Flower> roses = new ArrayList<>();
         Iterator<Rose> iterator = this.roses.iterator();
         while (iterator.hasNext()) {
-            Flower rose = iterator.next();
+            Rose rose = iterator.next();
             if (rose.getState() == state && rose.getHeight() >= height) {
                 roses.add(rose);
                 iterator.remove();
