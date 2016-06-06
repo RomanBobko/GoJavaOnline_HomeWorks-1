@@ -1,7 +1,5 @@
 package com.gojavaonline3.dlenchuk.module05.lists;
 
-import static com.gojavaonline3.dlenchuk.module05.lists.SimpleList.SortKind.MERGE;
-
 /**
  * Created by Dmitrij Lenchuk on 05.06.2016.
  * List Runner
@@ -27,13 +25,12 @@ public class ListRunner {
         System.out.println(listDouble);
         sorting(listDouble);
 
-        System.out.println("\nMerge Sort of Float...");
+        System.out.println("\nBubble Sort of Float...");
         Float[] arrayOfFloat = new Float[(int) (Math.random()*1_000)];
         for (int i = 0; i < arrayOfFloat.length; i++) {
             arrayOfFloat[i] = new Float(Math.random()*1_000);
         }
         SimpleList listFloat = new SimpleArrayList<Float>(arrayOfFloat);
-        listFloat.setSort(MERGE.getSort());
         System.out.println(listFloat);
         sorting(listFloat);
     }

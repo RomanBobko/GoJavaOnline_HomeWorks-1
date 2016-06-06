@@ -2,8 +2,6 @@ package com.gojavaonline3.dlenchuk.module05.lists;
 
 import java.util.Arrays;
 
-import static com.gojavaonline3.dlenchuk.module05.lists.SimpleList.SortKind.*;
-
 /**
  * Created by Dmitrij Lenchuk on 04.06.2016.
  * Class Simple Array List
@@ -18,18 +16,6 @@ public class SimpleArrayList<T extends Number & Comparable> implements SimpleLis
         checkList();
     }
 
-    private Sortable sort = BUBBLE.getSort();
-
-    @Override
-    public Sortable getSort() {
-        return sort;
-    }
-
-    @Override
-    public void setSort(Sortable sort) {
-        this.sort = sort;
-    }
-
     @Override
     public int length() {
         return list.length;
@@ -41,11 +27,17 @@ public class SimpleArrayList<T extends Number & Comparable> implements SimpleLis
         }
     }
 
+    // Bubble sort
     @Override
     public void sort() {
-        if (!sorted) {
-            sort.sort(list);
-            sorted = true;
+        for (int i = 1; i < list.length; i++) {
+            for (int j = i; j > 0; j--) {
+                if (list[j].compareTo(list[j - 1]) < 0) {
+                    T buffer = list[j];
+                    list[j] = list[j - 1];
+                    list[j - 1] = buffer;
+                }
+            }
         }
     }
 
