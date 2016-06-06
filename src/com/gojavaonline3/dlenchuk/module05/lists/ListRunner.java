@@ -1,6 +1,5 @@
 package com.gojavaonline3.dlenchuk.module05.lists;
 
-import static com.gojavaonline3.dlenchuk.module05.lists.SimpleList.SortKind.DO_NOT_SORT;
 import static com.gojavaonline3.dlenchuk.module05.lists.SimpleList.SortKind.MERGE;
 
 /**
@@ -10,24 +9,33 @@ import static com.gojavaonline3.dlenchuk.module05.lists.SimpleList.SortKind.MERG
 public class ListRunner {
     public static void main(String[] args) {
 
-        System.out.println("Bubble Sort...");
-        SimpleList list1 = new SimpleArrayList(generate());
-        System.out.println(list1);
-        sorting(list1);
+        System.out.println("Bubble Sort of Integer...");
+        Integer[] arrayOfInteger = new Integer[(int) (Math.random()*1_000)];
+        for (int i = 0; i < arrayOfInteger.length; i++) {
+            arrayOfInteger[i] = (int) (Math.random()*1_000);
+        }
+        SimpleList listInteger = new SimpleArrayList<Integer>(arrayOfInteger);
+        System.out.println(listInteger);
+        sorting(listInteger);
 
-        System.out.println();
-        System.out.println("Merge Sort...");
-        SimpleList list2 = new SimpleArrayList(generate());
-        System.out.println(list2);
-        list2.setSort(MERGE.getSort());
-        sorting(list2);
+        System.out.println("\nBubble Sort of Double...");
+        Double[] arrayOfDouble = new Double[(int) (Math.random()*1_000)];
+        for (int i = 0; i < arrayOfDouble.length; i++) {
+            arrayOfDouble[i] = Math.random()*1_000;
+        }
+        SimpleList listDouble = new SimpleArrayList<Double>(arrayOfDouble);
+        System.out.println(listDouble);
+        sorting(listDouble);
 
-        System.out.println();
-        System.out.println("No Sort...");
-        SimpleList list3 = new SimpleArrayList(generate());
-        System.out.println(list3);
-        list2.setSort(DO_NOT_SORT.getSort());
-        sorting(list3);
+        System.out.println("\nMerge Sort of Float...");
+        Float[] arrayOfFloat = new Float[(int) (Math.random()*1_000)];
+        for (int i = 0; i < arrayOfFloat.length; i++) {
+            arrayOfFloat[i] = new Float(Math.random()*1_000);
+        }
+        SimpleList listFloat = new SimpleArrayList<Float>(arrayOfFloat);
+        listFloat.setSort(MERGE.getSort());
+        System.out.println(listFloat);
+        sorting(listFloat);
     }
 
     private static void sorting(SimpleList list) {
@@ -36,14 +44,6 @@ public class ListRunner {
         System.out.println(list);
         System.out.println("Length of Array: " + list.length());
         System.out.println("Time of Job: " + (System.nanoTime() - time) / 1000 / 1000 + "ms");
-    }
-
-    private static int[] generate() {
-        int[] array = new int[(int) (Math.random()*1_000)];
-        for (int i = 0; i < array.length; i++) {
-            array[i] = (int) (Math.random()*1_000);
-        }
-        return array;
     }
 
 }
