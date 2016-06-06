@@ -1,5 +1,6 @@
 package com.gojavaonline3.dlenchuk.module05.lists;
 
+import static com.gojavaonline3.dlenchuk.module05.lists.SimpleList.SortKind.DO_NOT_SORT;
 import static com.gojavaonline3.dlenchuk.module05.lists.SimpleList.SortKind.MERGE;
 
 /**
@@ -25,7 +26,7 @@ public class ListRunner {
         System.out.println("No Sort...");
         SimpleList list3 = new SimpleArrayList(generate());
         System.out.println(list3);
-        list2.setSort(MERGE.getSort());
+        list2.setSort(DO_NOT_SORT.getSort());
         sorting(list3);
     }
 
@@ -34,7 +35,7 @@ public class ListRunner {
         list.sort();
         System.out.println(list);
         System.out.println("Length of Array: " + list.length());
-        System.out.println("Time of Job: " + (System.nanoTime() - time)/1000/1000 + "ms");
+        System.out.println("Time of Job: " + (System.nanoTime() - time) / 1000 / 1000 + "ms");
     }
 
     private static int[] generate() {
