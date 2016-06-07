@@ -1,5 +1,7 @@
 package com.gojavaonline3.dlenchuk.module04.temperature;
 
+import java.util.Arrays;
+
 import static com.gojavaonline3.dlenchuk.module04.temperature.Thermometer.Units.*;
 
 /**
@@ -7,7 +9,7 @@ import static com.gojavaonline3.dlenchuk.module04.temperature.Thermometer.Units.
  * Class ThermometerRunner
  */
 public class ThermometerRunner {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws OutOfBoundsThermometerException, IllegalUnitOfTemperatureException {
 
         Thermometer thermometer1 = new Thermometer();
         System.out.println("thermometer1: " + thermometer1);
@@ -25,13 +27,20 @@ public class ThermometerRunner {
         try {
             thermometer2.delta("100C");
             System.out.println("thermometer2 +100C: " + thermometer2);
-        } catch (IllegalArgumentException e) {
-            System.out.println(e);
+        } catch (OutOfBoundsThermometerException e) {
+            System.out.println("Temperature '" + e.getTemperature() + "' is out of thermometer's bounds: " + Arrays.toString(Thermometer.TemperatureRange.values()));
         }
         thermometer2.delta("-5K");
         System.out.println("thermometer2 -5K: " + thermometer2);
-        thermometer2.delta("-7F");
-        System.out.println("thermometer2 -7F: " + thermometer2);
+
+        try {
+            thermometer2.delta("-7R");
+            System.out.println("thermometer2 -7F: " + thermometer2);
+        } catch (IllegalUnitOfTemperatureException e) {
+            System.out.println("The unit '" + e.getUnitName() + "' is not supported");
+        } catch (OutOfBoundsThermometerException e) {
+            System.out.println("Temperature '" + e.getTemperature() + "' is out of thermometer's bounds: " + Arrays.toString(Thermometer.TemperatureRange.values()));
+        }
 
         System.out.println("Compare: " + thermometer2.compareTo(thermometer1));
         System.out.println("Compare: " + thermometer2.compareTo(null));

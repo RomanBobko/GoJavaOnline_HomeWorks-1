@@ -1,7 +1,5 @@
 package com.gojavaonline3.dlenchuk.module04.temperature;
 
-import java.util.Arrays;
-
 /**
  * Created by Dmitrij Lenchuk on 02.06.2016.
  * Class Thermometer
@@ -33,15 +31,15 @@ public class Thermometer implements Comparable {
 
     private double kelvinT;
 
-    Thermometer() {
+    Thermometer() throws OutOfBoundsThermometerException {
         setKelvinT(TemperatureRange.MIN.getValue());
     }
 
-    Thermometer(String temperature) {
+    Thermometer(String temperature) throws IllegalUnitOfTemperatureException, OutOfBoundsThermometerException {
         setKelvinT(parseTemperature(temperature));
     }
 
-    public void setKelvinT(double kelvinT) {
+    public void setKelvinT(double kelvinT) throws OutOfBoundsThermometerException {
         checkRange(kelvinT);
         this.kelvinT = kelvinT;
     }
@@ -54,7 +52,7 @@ public class Thermometer implements Comparable {
         return kelvinToCelsius(kelvinT);
     }
 
-    public String temperature(Units unit) throws IllegalArgumentException{
+    public String temperature(Units unit) throws IllegalUnitOfTemperatureException {
         switch (unit) {
             case K:
                 return String.format("%.2f", kelvinT) + '\u00B0' + unit.name();
@@ -63,10 +61,10 @@ public class Thermometer implements Comparable {
             case F:
                 return String.format("%.2f", kelvinToFahrenheit(kelvinT)) + '\u00B0' + unit.name();
         }
-        throw new IllegalArgumentException("The unit '" + unit.name() + "' is not supported");
+        throw new IllegalUnitOfTemperatureException(unit.name());
     }
 
-    public void delta(String delta) {
+    public void delta(String delta) throws IllegalUnitOfTemperatureException, OutOfBoundsThermometerException {
 
         delta = delta.trim();
         char unit = parseUnits(delta);
@@ -82,7 +80,7 @@ public class Thermometer implements Comparable {
                 setKelvinT(fahrenheitToKelvin(kelvinToFahrenheit(kelvinT) + value));
                 return;
         }
-        throw new IllegalArgumentException("The unit '" + unit + "' is not supported");
+        throw new IllegalUnitOfTemperatureException(String.valueOf(unit));
     }
 
     private double fahrenheitToCelsius(double tFahrenheit) {
@@ -109,7 +107,7 @@ public class Thermometer implements Comparable {
         return celsiusT - ABSOLUTE_ZERO;
     }
 
-    private double parseTemperature(String temperature) throws IllegalArgumentException {
+    private double parseTemperature(String temperature) throws IllegalUnitOfTemperatureException {
         temperature = temperature.trim();
         char unit = parseUnits(temperature);
         double value = Double.valueOf(temperature.substring(0, temperature.length() - 1));
@@ -121,26 +119,27 @@ public class Thermometer implements Comparable {
             case F:
                 return fahrenheitToKelvin(value);
         }
-        throw new IllegalArgumentException("The unit '" + unit + "' is not supported");
+        throw new IllegalUnitOfTemperatureException(String.valueOf(unit));
     }
 
-    private char parseUnits(String temperature) throws IllegalArgumentException {
+    private char parseUnits(String temperature) throws IllegalUnitOfTemperatureException {
         temperature = temperature.trim();
         char unit = new StringBuffer(temperature).charAt(temperature.length() - 1);
         checkUnit(unit);
         return unit;
     }
 
-    private void checkRange(double kelvinT) throws IllegalArgumentException {
+    private void checkRange(double kelvinT) throws OutOfBoundsThermometerException {
         if (kelvinT < TemperatureRange.MIN.getValue() || kelvinT > TemperatureRange.MAX.getValue()) {
-            throw new IllegalArgumentException("Out of Temperature Range");
+            throw new OutOfBoundsThermometerException(kelvinT);
         }
     }
 
-    private void checkUnit(char unit) throws IllegalArgumentException {
-        int index = Arrays.binarySearch(Units.values(), Units.valueOf(String.valueOf(unit)));
-        if (index < 0) {
-            throw new IllegalArgumentException("The unit '" + unit + "' is not supported");
+    private void checkUnit(char unit) throws IllegalUnitOfTemperatureException {
+        try {
+            Units.valueOf(String.valueOf(unit));
+        } catch (IllegalArgumentException e) {
+            throw new IllegalUnitOfTemperatureException(String.valueOf(unit));
         }
     }
 
@@ -154,13 +153,13 @@ public class Thermometer implements Comparable {
 
     @Override
     public int compareTo(Object obj) {
-        if (obj == null) return (int)-this.kelvinT;
+        if (obj == null) return (int) -this.kelvinT;
         if (this == obj) return 0;
         if (!(obj instanceof Thermometer))
             throw new IllegalArgumentException("Invalid class of object '" + obj.getClass().getSimpleName() + '\'');
 
         Thermometer that = (Thermometer) obj;
 
-        return (int)(this.kelvinT - that.kelvinT);
+        return (int) (this.kelvinT - that.kelvinT);
     }
 }
