@@ -12,8 +12,7 @@ public abstract class MusicalInstrument {
     public static enum Kind {
         KEYBOARDS,
         WINDS,
-        STRINGED,
-        NAN
+        STRINGED
     }
 
 
@@ -61,9 +60,8 @@ public abstract class MusicalInstrument {
 
         MusicalInstrument that = (MusicalInstrument) o;
 
-        if (id != that.id) return false;
+        return id == that.id;
 
-        return true;
     }
 
     @Override

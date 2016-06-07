@@ -28,10 +28,7 @@ public class MusicStore {
     }
 
     public boolean add(MusicalInstrument musicalInstrument) {
-        if (musicalInstruments.add(musicalInstrument)) {
-            return true;
-        }
-        return false;
+        return musicalInstruments.add(musicalInstrument);
     }
 
     public MusicalInstrument item(int id) {
@@ -49,11 +46,7 @@ public class MusicStore {
     }
 
     public boolean remove(int id) {
-        String item = item(indexOf(id)).toString();
-        if (musicalInstruments.remove(item(indexOf(id)))) {
-            return true;
-        }
-        return false;
+        return musicalInstruments.remove(item(indexOf(id)));
     }
 
     public void clear() {
@@ -62,19 +55,20 @@ public class MusicStore {
 
     public void report() {
         System.out.println(musicalInstruments.size() == 0 ? "The Music Store is empty." : "Reporting...");
-        for (MusicalInstrument musicalInstrument : musicalInstruments) {
-            System.out.println(musicalInstrument);
-        }
+        musicalInstruments.forEach(System.out::println);
         System.out.println("=============================================================================");
-        System.out.println("Total amount: $" + totalAmount());
+        System.out.println("Total count: " + totalCount() + "; Total amount: $" + totalAmount());
     }
 
-    public int totalAmount() {
-        int result = 0;
+    private int totalCount() {
+        return musicalInstruments.size();
+    }
+
+    public long totalAmount() {
+        long result = 0;
         for (MusicalInstrument musicalInstrument : musicalInstruments) {
             result += musicalInstrument.getPrice();
-        }
-        return result;
+        }return result;
     }
 
     public void playAll(String notes) {
