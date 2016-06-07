@@ -30,6 +30,7 @@ public class MusicRunner {
         System.out.println();
         store.report();
 
+        /*Preparing and shipping goods*/
         try {
             Map<String, Integer> goods = new HashMap<String, Integer>();
             goods.put("piano", 1);
@@ -53,8 +54,8 @@ public class MusicRunner {
 //        System.out.println();
 //        System.out.println("Instruments are configuring...");
 //        store.item(10).play("Rahmaninov Simph.#1 for piano");
-//        store.item(9).play("Romans");
-//        store.item(4).play("Get up");
+//        store.item(3).play("Romans");
+//        store.item(5).play("Get up");
 //
 //        try {
 //            System.out.print("Playing not existed item... ");
