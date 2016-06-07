@@ -7,14 +7,14 @@ import com.gojavaonline3.dlenchuk.module04.distance.Point;
  * Class AreaRunner
  */
 public class AreaRunner {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws FigureExistenceIsImpossibleException {
 
         System.out.println();
         new Circle(new Point(0, 0), 10).draw();
         try {
             new Circle(new Point(0, 0), -10).draw();
-        } catch (IllegalArgumentException e) {
-            System.out.println(e);
+        } catch (FigureExistenceIsImpossibleException e) {
+            System.out.println(e.getMsg());
         }
 
         System.out.println();
@@ -25,13 +25,13 @@ public class AreaRunner {
         new Rectangle(new Point(0, 0), new Point(3, 0), new Point(3, 4), new Point(0, 4)).draw();
         try {
             new Rectangle(new Point(-1, 0), new Point(3, 0), new Point(3, 4), new Point(0, 4)).draw();
-        } catch (IllegalArgumentException e) {
-            System.out.println(e);
+        } catch (FigureExistenceIsImpossibleException e) {
+            System.out.println(e.getMsg());
         }
         try {
             new Rectangle(new Point(0, 0), new Point(3, 0), new Point(0, 4), new Point(3, 4)).draw();
-        } catch (IllegalArgumentException e) {
-            System.out.println(e);
+        } catch (FigureExistenceIsImpossibleException e) {
+            System.out.println(e.getMsg());
         }
     }
 }

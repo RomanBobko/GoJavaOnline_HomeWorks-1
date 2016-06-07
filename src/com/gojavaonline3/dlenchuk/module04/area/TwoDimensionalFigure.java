@@ -7,11 +7,11 @@ package com.gojavaonline3.dlenchuk.module04.area;
 public abstract class TwoDimensionalFigure {
 
     protected double area;
-    protected boolean calculated = false; //Дима, у нас в спор в группе был, стоит ли делать такую проверку?..
+    protected boolean calculated = false;
 
     public abstract double getArea();
 
-    public abstract void checkExists() throws IllegalArgumentException;
+    public abstract void checkExists() throws FigureExistenceIsImpossibleException;
 
     public void draw() {
         System.out.println("Draw " + this.toString() + ". Area is " + getArea());
