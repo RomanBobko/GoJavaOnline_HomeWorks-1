@@ -14,7 +14,9 @@ public class Circle extends TwoDimensionalFigure{
     Circle(Point center, int radius) throws FigureExistenceIsImpossibleException {
         this.center = center;
         this.radius = radius;
-        checkExists();
+        if (!checkExists()) {
+            throw new FigureExistenceIsImpossibleException("Such circle can not be created\nCause: 'radius < 0'");
+        }
     }
 
     public Point getCenter() {
@@ -34,11 +36,8 @@ public class Circle extends TwoDimensionalFigure{
         return area;
     }
 
-    @Override
-    public void checkExists() throws FigureExistenceIsImpossibleException {
-        if (radius < 0) {
-            throw new FigureExistenceIsImpossibleException("Such circle can not be created\nCause: 'radius < 0'");
-        }
+    public boolean checkExists() {
+        return radius >= 0;
     }
 
     @Override

@@ -11,8 +11,6 @@ public abstract class TwoDimensionalFigure {
 
     public abstract double getArea();
 
-    public abstract void checkExists() throws FigureExistenceIsImpossibleException;
-
     public void draw() {
         System.out.println("Draw " + this.toString() + ". Area is " + getArea());
     }

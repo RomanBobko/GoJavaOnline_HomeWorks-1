@@ -6,14 +6,16 @@ import java.util.Arrays;
  * Created by Dmitrij Lenchuk on 04.06.2016.
  * Class Simple Array List
  */
-public class SimpleArrayList<T extends Number & Comparable> implements SimpleList<T> {
+public class SimpleArrayList<T extends Number & Comparable<T>> implements SimpleList<T> {
 
     private final T[] list;
     private boolean sorted = false;
 
     SimpleArrayList(T[] list) {
+        if (list == null || list.length == 0) {
+            throw new IllegalArgumentException("List must be not null and have one item at least");
+        }
         this.list = list;
-        checkList();
     }
 
     @Override
@@ -21,15 +23,10 @@ public class SimpleArrayList<T extends Number & Comparable> implements SimpleLis
         return list.length;
     }
 
-    private void checkList() throws IllegalArgumentException {
-        if (list == null || list.length == 0) {
-            throw new IllegalArgumentException("List must be not null and have one item at least");
-        }
-    }
-
     // Bubble sort
     @Override
-    public void sort() {
+    public SimpleArrayList<T> sort() {
+        T[] list = Arrays.copyOf(this.list, this.list.length);
         for (int i = 1; i < list.length; i++) {
             for (int j = i; j > 0; j--) {
                 if (list[j].compareTo(list[j - 1]) < 0) {
@@ -39,6 +36,7 @@ public class SimpleArrayList<T extends Number & Comparable> implements SimpleLis
                 }
             }
         }
+        return new SimpleArrayList<T>(list);
     }
 
     @Override

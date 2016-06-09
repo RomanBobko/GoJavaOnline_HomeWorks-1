@@ -40,7 +40,9 @@ public class Thermometer implements Comparable {
     }
 
     public void setKelvinT(double kelvinT) throws OutOfBoundsThermometerException {
-        checkRange(kelvinT);
+        if (kelvinT < TemperatureRange.MIN.getValue() || kelvinT > TemperatureRange.MAX.getValue()) {
+            throw new OutOfBoundsThermometerException(kelvinT);
+        }
         this.kelvinT = kelvinT;
     }
 
@@ -125,22 +127,12 @@ public class Thermometer implements Comparable {
     private char parseUnits(String temperature) throws IllegalUnitOfTemperatureException {
         temperature = temperature.trim();
         char unit = new StringBuffer(temperature).charAt(temperature.length() - 1);
-        checkUnit(unit);
-        return unit;
-    }
-
-    private void checkRange(double kelvinT) throws OutOfBoundsThermometerException {
-        if (kelvinT < TemperatureRange.MIN.getValue() || kelvinT > TemperatureRange.MAX.getValue()) {
-            throw new OutOfBoundsThermometerException(kelvinT);
-        }
-    }
-
-    private void checkUnit(char unit) throws IllegalUnitOfTemperatureException {
         try {
             Units.valueOf(String.valueOf(unit));
         } catch (IllegalArgumentException e) {
             throw new IllegalUnitOfTemperatureException(String.valueOf(unit));
         }
+        return unit;
     }
 
     @Override

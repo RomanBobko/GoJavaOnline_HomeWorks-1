@@ -12,9 +12,9 @@ public class ListRunner {
         for (int i = 0; i < arrayOfInteger.length; i++) {
             arrayOfInteger[i] = (int) (Math.random()*1_000);
         }
-        SimpleList listInteger = new SimpleArrayList<Integer>(arrayOfInteger);
+        SimpleList<Integer> listInteger = new SimpleArrayList<>(arrayOfInteger);
         System.out.println(listInteger);
-        sorting(listInteger);
+        listInteger = sorting(listInteger);
 
         System.out.println("\nBubble Sort of Double...");
         Double[] arrayOfDouble = new Double[(int) (Math.random()*1_000)];
@@ -23,7 +23,7 @@ public class ListRunner {
         }
         SimpleList listDouble = new SimpleArrayList<Double>(arrayOfDouble);
         System.out.println(listDouble);
-        sorting(listDouble);
+        listDouble = sorting(listDouble);
 
         System.out.println("\nBubble Sort of Float...");
         Float[] arrayOfFloat = new Float[(int) (Math.random()*1_000)];
@@ -32,15 +32,17 @@ public class ListRunner {
         }
         SimpleList listFloat = new SimpleArrayList<Float>(arrayOfFloat);
         System.out.println(listFloat);
-        sorting(listFloat);
+        listFloat = sorting(listFloat);
+
     }
 
-    private static void sorting(SimpleList list) {
+    private static <T extends Number & Comparable<T>> SimpleList<T> sorting(SimpleList<T> list) {
         long time = System.nanoTime();
-        list.sort();
-        System.out.println(list);
+        SimpleList<T> simpleList = list.sort();
+        System.out.println(simpleList);
         System.out.println("Length of Array: " + list.length());
         System.out.println("Time of Job: " + (System.nanoTime() - time) / 1000 / 1000 + "ms");
+        return simpleList;
     }
 
 }

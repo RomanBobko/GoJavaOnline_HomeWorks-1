@@ -25,7 +25,6 @@ public class Triangle extends TwoDimensionalFigure{
         sideB = new Line(pointA, pointC);
         sideC = new Line(pointA, pointB);
 
-        checkExists();
     }
 
     public Point getPointA() {
@@ -65,20 +64,6 @@ public class Triangle extends TwoDimensionalFigure{
             calculated = true;
         }
         return area;
-    }
-
-    @Override
-    public void checkExists() throws FigureExistenceIsImpossibleException {
-        double a = sideA.length();
-        double b = sideB.length();
-        double c = sideC.length();
-
-        if (a <= 0 || b <= 0 || c <= 0) {
-            throw new FigureExistenceIsImpossibleException("Such triangle can not be created\nCause: '" + (a <= 0 ? "a <= 0" : b <= 0 ? "b <= 0" : "c <= 0") + "'");
-        }
-        if (a > b + c || b > a + c || c > a + b) {
-            throw new FigureExistenceIsImpossibleException("Such triangle can not be created\nCause: '" + (a > b + c ? "a > b + c" : b > a + c ? "b > a + c" : "c > a + b") + "'");
-        }
     }
 
     @Override
