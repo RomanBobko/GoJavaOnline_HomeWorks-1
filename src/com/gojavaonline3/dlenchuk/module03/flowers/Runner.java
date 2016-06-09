@@ -8,17 +8,12 @@ import java.util.List;
  */
 public class Runner {
     public static void main(String[] args) {
-//        new Rose(Color.RED, 70, true, State.BUD);
-//        new Aster(Color.WHITE, 40, false, State.SPROUT);
-//        new Chamomile(Color.BLUE, 80, false, State.OPENED);
-//        new Tulip(Color.BLACK, 50, false, State.WILT);
 
         Rosebush rosebush = new Rosebush(Color.BLACK, true);
         for (int i = 0; i < 100; i++) {
             rosebush.grow();
         }
         System.out.println(rosebush);
-
 
         System.out.println();
         System.out.println("Trimming OPENED...");

@@ -10,6 +10,12 @@ import java.util.List;
  */
 public class Rosebush {
 
+    private class Rose extends Flower {
+        private Rose(Color color, int height, boolean hasSmell, State state) {
+            super(color, height, hasSmell, state);
+        }
+    }
+
     private List<Rose> roses = new ArrayList<>();
 
     private final Color color;
@@ -46,7 +52,7 @@ public class Rosebush {
     }
 
     public void birth() {
-        int newRosesCount = (int)(Math.random()*5);
+        int newRosesCount = (int)(Math.random()*10);
         for (int i = 0; i < newRosesCount; i++) {
             roses.add(new Rose(color, (int)(Math.random()*60), smelled, State.SPROUT));
         }
