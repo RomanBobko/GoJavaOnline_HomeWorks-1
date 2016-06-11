@@ -10,7 +10,9 @@ public interface SimpleList<T extends Number & Comparable<T>> {
 
     public T max();
 
-    public SimpleArrayList<T> sort();
+    public SimpleArrayList<T> bubbleSort();
+
+    public SimpleList<T> mergeSort();
 
     public int length();
 }

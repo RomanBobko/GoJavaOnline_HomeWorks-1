@@ -23,9 +23,8 @@ public class SimpleArrayList<T extends Number & Comparable<T>> implements Simple
         return list.length;
     }
 
-    // Bubble sort
     @Override
-    public SimpleArrayList<T> sort() {
+    public SimpleArrayList<T> bubbleSort() {
         T[] list = Arrays.copyOf(this.list, this.list.length);
         for (int i = 1; i < list.length; i++) {
             for (int j = i; j > 0; j--) {
@@ -37,6 +36,42 @@ public class SimpleArrayList<T extends Number & Comparable<T>> implements Simple
             }
         }
         return new SimpleArrayList<T>(list);
+    }
+
+    @Override
+    public SimpleList<T> mergeSort() {
+        T[] mergedList = Arrays.copyOf(list, list.length);
+        int base = 2;
+        final int lastIndex = (mergedList.length % 2 == 0) ? mergedList.length : mergedList.length - 1;
+        do {
+            int shift = (int) (base / 2);
+            for (int i = 0; i < lastIndex; i += base) {
+                final int lastItem = i + 2 * shift - 1 < mergedList.length ? i + 2 * shift - 1 : mergedList.length - 1;
+                final T[] merge = merge(mergedList, i, i + shift - 1, i + shift, lastItem);
+                System.arraycopy(merge, 0, mergedList, i, merge.length);
+            }
+        } while ((base *= 2) / 2 <= mergedList.length);
+        return new SimpleArrayList<T>(mergedList);
+    }
+
+    public T[] merge(final T[] list, final int minorMin, final int minorMax, final int majorMin, final int majorMax) {
+        int minorCurrent = minorMin;
+        int majorCurrent = majorMin;
+        int counter = 0;
+        T[] result = Arrays.copyOfRange(list, minorMin, majorMax + 1);
+        while (minorCurrent <= minorMax && majorCurrent <= majorMax) {
+            T item = null;
+            if (list[minorCurrent].compareTo(list[majorCurrent]) < 0) {
+                item = list[minorCurrent++];
+            } else {
+                item = list[majorCurrent++];
+            }
+            result[counter++] = item;
+        }
+        int current = (minorCurrent > minorMax) ? majorCurrent : minorCurrent;
+        int max = (minorCurrent > minorMax) ? majorMax : minorMax;
+        System.arraycopy(list, current, result, counter, result.length - counter);
+        return result;
     }
 
     @Override
