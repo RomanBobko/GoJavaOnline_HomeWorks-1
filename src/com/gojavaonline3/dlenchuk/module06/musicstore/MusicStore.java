@@ -11,6 +11,12 @@ import java.util.Map;
  */
 public class MusicStore {
 
+    /* ToDo
+     * Дима, ты говорил, что мы вернемся к этому классу, когда будем говорить об антипаттернах
+     * Разговор был о моих "минах"
+     * void checkXxxx() throws XxxxException
+    * */
+
     public enum Goods {
         GUITAR,
         PIANO,

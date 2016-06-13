@@ -6,7 +6,6 @@ package com.gojavaonline3.dlenchuk.module05.lists;
  */
 public class ListRunner {
     public static void main(String[] args) {
-
         System.out.println("Merge Sort of Integer...");
         Integer[] arrayOfInteger = new Integer[(int) (Math.random()*1_000)];
         for (int i = 0; i < arrayOfInteger.length; i++) {

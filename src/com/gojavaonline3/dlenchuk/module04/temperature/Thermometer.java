@@ -6,6 +6,12 @@ package com.gojavaonline3.dlenchuk.module04.temperature;
  */
 public class Thermometer implements Comparable {
 
+    /* ToDo
+    *  Класс реализует сразу две сущности "Температура" и "Термометр",
+    *  что является антипаттерном Blob.
+    *  Вариант решения - переписать в виде двух классов
+    * */
+
     public static final double ABSOLUTE_ZERO = -273.15;
 
     public static enum Units {
