@@ -34,6 +34,7 @@ public class Line {
                                (point2.getY() - point1.getY())*(point2.getY() - point1.getY()));
             calculated = true;
         }
+
         return length;
     }
 

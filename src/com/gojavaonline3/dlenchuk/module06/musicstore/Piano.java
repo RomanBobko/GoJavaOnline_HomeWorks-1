@@ -16,4 +16,5 @@ public class Piano extends MusicalInstrument {
     public void play(String notes) {
         System.out.println("Pianist plays piano on notes: '" + notes + "'");
     }
+
 }

@@ -15,6 +15,7 @@ public class SimpleArrayList<T extends Number & Comparable<T>> implements Simple
         if (list == null || list.length == 0) {
             throw new IllegalArgumentException("List must be not null and have one item at least");
         }
+
         this.list = list;
     }
 
@@ -35,6 +36,7 @@ public class SimpleArrayList<T extends Number & Comparable<T>> implements Simple
                 }
             }
         }
+
         return new SimpleArrayList<T>(list);
     }
 
@@ -43,6 +45,7 @@ public class SimpleArrayList<T extends Number & Comparable<T>> implements Simple
         T[] mergedList = Arrays.copyOf(list, list.length);
         int base = 2;
         final int lastIndex = (mergedList.length % 2 == 0) ? mergedList.length : mergedList.length - 1;
+
         do {
             int shift = (int) (base / 2);
             for (int i = 0; i < lastIndex; i += base) {
@@ -51,6 +54,7 @@ public class SimpleArrayList<T extends Number & Comparable<T>> implements Simple
                 System.arraycopy(merge, 0, mergedList, i, merge.length);
             }
         } while ((base *= 2) / 2 <= mergedList.length);
+
         return new SimpleArrayList<T>(mergedList);
     }
 
@@ -59,6 +63,7 @@ public class SimpleArrayList<T extends Number & Comparable<T>> implements Simple
         int majorCurrent = majorMin;
         int counter = 0;
         T[] result = Arrays.copyOfRange(list, minorMin, majorMax + 1);
+
         while (minorCurrent <= minorMax && majorCurrent <= majorMax) {
             T item = null;
             if (list[minorCurrent].compareTo(list[majorCurrent]) < 0) {
@@ -68,9 +73,11 @@ public class SimpleArrayList<T extends Number & Comparable<T>> implements Simple
             }
             result[counter++] = item;
         }
+
         int current = (minorCurrent > minorMax) ? majorCurrent : minorCurrent;
         int max = (minorCurrent > minorMax) ? majorMax : minorMax;
         System.arraycopy(list, current, result, counter, result.length - counter);
+
         return result;
     }
 
@@ -85,6 +92,7 @@ public class SimpleArrayList<T extends Number & Comparable<T>> implements Simple
                     min = list[i];
                 }
             }
+
             return min;
         }
     }
@@ -100,6 +108,7 @@ public class SimpleArrayList<T extends Number & Comparable<T>> implements Simple
                     max = list[i];
                 }
             }
+
             return max;
         }
     }

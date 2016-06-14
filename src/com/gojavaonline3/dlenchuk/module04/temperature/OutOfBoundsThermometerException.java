@@ -5,6 +5,7 @@ package com.gojavaonline3.dlenchuk.module04.temperature;
  * Exception OutOfBoundsThermometerException
  */
 public class OutOfBoundsThermometerException extends Exception{
+
     private final double temperature;
 
     public OutOfBoundsThermometerException(double temperature) {
@@ -14,4 +15,5 @@ public class OutOfBoundsThermometerException extends Exception{
     public double getTemperature() {
         return temperature;
     }
+
 }

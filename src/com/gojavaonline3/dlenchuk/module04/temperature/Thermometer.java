@@ -1,10 +1,13 @@
 package com.gojavaonline3.dlenchuk.module04.temperature;
 
+import static com.gojavaonline3.dlenchuk.module04.temperature.Temperature.ABSOLUTE_ZERO_IN_CELSIUS;
+import static com.gojavaonline3.dlenchuk.module04.temperature.Temperature.*;
+
 /**
  * Created by Dmitrij Lenchuk on 02.06.2016.
  * Class Thermometer
  */
-public class Thermometer implements Comparable {
+public class Thermometer {
 
     /* ToDo
     *  Класс реализует сразу две сущности "Температура" и "Термометр",
@@ -12,17 +15,9 @@ public class Thermometer implements Comparable {
     *  Вариант решения - переписать в виде двух классов
     * */
 
-    public static final double ABSOLUTE_ZERO = -273.15;
-
-    public static enum Units {
-        K,
-        C,
-        F
-    }
-
     public static enum TemperatureRange {
-        MIN(-40 - ABSOLUTE_ZERO),
-        MAX(40 - ABSOLUTE_ZERO);
+        MIN(-40 - ABSOLUTE_ZERO_IN_CELSIUS),
+        MAX(40 - ABSOLUTE_ZERO_IN_CELSIUS);
 
         private double value;
 
@@ -35,110 +30,49 @@ public class Thermometer implements Comparable {
         }
     }
 
-    private double kelvinT;
+    private Temperature temperature;
 
     Thermometer() throws OutOfBoundsThermometerException {
-        setKelvinT(TemperatureRange.MIN.getValue());
+        setTemperature(new Temperature(TemperatureRange.MIN.getValue()));
     }
 
     Thermometer(String temperature) throws IllegalUnitOfTemperatureException, OutOfBoundsThermometerException {
-        setKelvinT(parseTemperature(temperature));
+        setTemperature(new Temperature(temperature));
     }
 
-    public void setKelvinT(double kelvinT) throws OutOfBoundsThermometerException {
-        if (kelvinT < TemperatureRange.MIN.getValue() || kelvinT > TemperatureRange.MAX.getValue()) {
-            throw new OutOfBoundsThermometerException(kelvinT);
+    public Temperature getTemperature() {
+        return temperature;
+    }
+
+    public void setTemperature(Temperature temperature) throws OutOfBoundsThermometerException {
+        if (temperature.getKelvinT() < TemperatureRange.MIN.getValue() || temperature.getKelvinT() > TemperatureRange.MAX.getValue()) {
+            throw new OutOfBoundsThermometerException(temperature.getKelvinT());
         }
-        this.kelvinT = kelvinT;
+        this.temperature = temperature;
     }
 
     public double fahrenheit() {
-        return kelvinToFahrenheit(kelvinT);
+        return getTemperature().fahrenheit();
     }
 
     public double celsius() {
-        return kelvinToCelsius(kelvinT);
+        return getTemperature().celsius();
     }
 
     public String temperature(Units unit) throws IllegalUnitOfTemperatureException {
         switch (unit) {
-            case K:
-                return String.format("%.2f", kelvinT) + '\u00B0' + unit.name();
-            case C:
-                return String.format("%.2f", kelvinToCelsius(kelvinT)) + '\u00B0' + unit.name();
-            case F:
-                return String.format("%.2f", kelvinToFahrenheit(kelvinT)) + '\u00B0' + unit.name();
+            case KELVIN:
+                return String.format("%.2f", getTemperature().getKelvinT()) + '\u00B0' + unit.name();
+            case CELSIUS:
+                return String.format("%.2f", getTemperature().celsius()) + '\u00B0' + unit.name();
+            case FAHRENHEIT:
+                return String.format("%.2f", getTemperature().fahrenheit()) + '\u00B0' + unit.name();
         }
         throw new IllegalUnitOfTemperatureException(unit.name());
     }
 
-    public void delta(String delta) throws IllegalUnitOfTemperatureException, OutOfBoundsThermometerException {
-
-        delta = delta.trim();
-        char unit = parseUnits(delta);
-        double value = Double.valueOf(delta.substring(0, delta.length() - 1));
-        switch (Units.valueOf(String.valueOf(unit))) {
-            case K:
-                setKelvinT(kelvinT + value);
-                return;
-            case C:
-                setKelvinT(kelvinT + value);
-                return;
-            case F:
-                setKelvinT(fahrenheitToKelvin(kelvinToFahrenheit(kelvinT) + value));
-                return;
-        }
-        throw new IllegalUnitOfTemperatureException(String.valueOf(unit));
-    }
-
-    private double fahrenheitToCelsius(double tFahrenheit) {
-        return 5 * (tFahrenheit - 32) / 9;
-    }
-
-    private double celsiusToFahrenheit(double tCelsius) {
-        return 9 * tCelsius / 5 + 32;
-    }
-
-    private double kelvinToFahrenheit(double kelvinT) {
-        return celsiusToFahrenheit(kelvinToCelsius(kelvinT));
-    }
-
-    private double fahrenheitToKelvin(double tFahrenheit) {
-        return celsiusToKelvin(fahrenheitToCelsius(tFahrenheit));
-    }
-
-    private double kelvinToCelsius(double kelvinT) {
-        return kelvinT + ABSOLUTE_ZERO;
-    }
-
-    private double celsiusToKelvin(double celsiusT) {
-        return celsiusT - ABSOLUTE_ZERO;
-    }
-
-    private double parseTemperature(String temperature) throws IllegalUnitOfTemperatureException {
-        temperature = temperature.trim();
-        char unit = parseUnits(temperature);
-        double value = Double.valueOf(temperature.substring(0, temperature.length() - 1));
-        switch (Units.valueOf(String.valueOf(unit))) {
-            case K:
-                return value;
-            case C:
-                return celsiusToKelvin(value);
-            case F:
-                return fahrenheitToKelvin(value);
-        }
-        throw new IllegalUnitOfTemperatureException(String.valueOf(unit));
-    }
-
-    private char parseUnits(String temperature) throws IllegalUnitOfTemperatureException {
-        temperature = temperature.trim();
-        char unit = new StringBuffer(temperature).charAt(temperature.length() - 1);
-        try {
-            Units.valueOf(String.valueOf(unit));
-        } catch (IllegalArgumentException e) {
-            throw new IllegalUnitOfTemperatureException(String.valueOf(unit));
-        }
-        return unit;
+    public Temperature delta(String delta) throws IllegalUnitOfTemperatureException, OutOfBoundsThermometerException {
+        return getTemperature().delta(delta);
     }
 
     @Override
@@ -149,15 +83,4 @@ public class Thermometer implements Comparable {
                 '}';
     }
 
-    @Override
-    public int compareTo(Object obj) {
-        if (obj == null) return (int) -this.kelvinT;
-        if (this == obj) return 0;
-        if (!(obj instanceof Thermometer))
-            throw new IllegalArgumentException("Invalid class of object '" + obj.getClass().getSimpleName() + '\'');
-
-        Thermometer that = (Thermometer) obj;
-
-        return (int) (this.kelvinT - that.kelvinT);
-    }
 }

@@ -8,6 +8,7 @@ import com.gojavaonline3.dlenchuk.module04.distance.Point;
  * Class Rectangle
  */
 public class Rectangle extends TwoDimensionalFigure {
+
     private final Point pointA;
     private final Point pointB;
     private final Point pointC;
@@ -23,10 +24,12 @@ public class Rectangle extends TwoDimensionalFigure {
         this.pointB = pointB;
         this.pointC = pointC;
         this.pointD = pointD;
+
         this.sideA = new Line(pointA, pointB);
         this.sideB = new Line(pointB, pointC);
         this.sideC = new Line(pointC, pointD);
         this.sideD = new Line(pointD, pointA);
+
         if (!checkACEqualsBD()) {
             throw new FigureExistenceIsImpossibleException("Such rectangle can not be created\nCause: 'Side AC !=  Side BD'");
         }

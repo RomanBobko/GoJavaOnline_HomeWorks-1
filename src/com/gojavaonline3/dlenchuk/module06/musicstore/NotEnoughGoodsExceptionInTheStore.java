@@ -5,6 +5,7 @@ package com.gojavaonline3.dlenchuk.module06.musicstore;
  * Exception NotEnoughGoodsException
  */
 public class NotEnoughGoodsExceptionInTheStore extends GoodException {
+
     private final int orderedCount;
     private final int existedCount;
 
@@ -21,4 +22,5 @@ public class NotEnoughGoodsExceptionInTheStore extends GoodException {
     public int getExistedCount() {
         return existedCount;
     }
+
 }

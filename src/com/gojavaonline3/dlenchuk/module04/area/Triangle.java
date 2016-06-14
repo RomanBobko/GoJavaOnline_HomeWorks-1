@@ -8,6 +8,7 @@ import com.gojavaonline3.dlenchuk.module04.distance.Point;
  * Class Triangle
  */
 public class Triangle extends TwoDimensionalFigure{
+
     private final Point pointA;
     private final Point pointB;
     private final Point pointC;
@@ -24,7 +25,6 @@ public class Triangle extends TwoDimensionalFigure{
         sideA = new Line(pointB, pointC);
         sideB = new Line(pointA, pointC);
         sideC = new Line(pointA, pointB);
-
     }
 
     public Point getPointA() {
@@ -63,6 +63,7 @@ public class Triangle extends TwoDimensionalFigure{
 
             calculated = true;
         }
+
         return area;
     }
 

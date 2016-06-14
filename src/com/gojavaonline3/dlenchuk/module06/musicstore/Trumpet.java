@@ -16,4 +16,5 @@ public class Trumpet extends MusicalInstrument {
     public void play(String notes) {
         System.out.println("Trumpeter playing trumpet on notes: '" + notes + "'");
     }
+
 }

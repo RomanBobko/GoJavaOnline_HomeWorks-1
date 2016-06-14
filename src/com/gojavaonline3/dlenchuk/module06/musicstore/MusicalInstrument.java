@@ -15,13 +15,11 @@ public abstract class MusicalInstrument {
         STRINGED
     }
 
-
     private final int id;
     private final String producedBy;
     private final GregorianCalendar manufactureDate;
     private final Kind kind;
     private final int price;
-
 
     MusicalInstrument(int id, String producedBy, GregorianCalendar manufactureDate, Kind kind, int price) {
         this.id = id;
@@ -71,11 +69,12 @@ public abstract class MusicalInstrument {
 
     @Override
     public String toString() {
-
         String date = "" + manufactureDate.get(Calendar.DAY_OF_MONTH) + '.' +
                 manufactureDate.get(Calendar.MONTH) + '.' +
                 manufactureDate.get(Calendar.YEAR) ;
+
         return  this.getClass().getSimpleName() +
                 '{' + id +"; " + producedBy + "; " + date + "; " + kind + "; " + price + '}';
     }
+
 }

@@ -28,6 +28,7 @@ public class Directory extends File {
                 return i;
             }
         }
+
         return -1;
     }
 
@@ -40,6 +41,7 @@ public class Directory extends File {
             System.out.println("Item '" + file.getName() + "' has been added to Directory '" + this.getName() + "'");
             return true;
         }
+
         return false;
     }
 
@@ -51,10 +53,12 @@ public class Directory extends File {
         if (file == null) {
             return false;
         }
+
         if (files.remove(file)) {
             System.out.println("Item '" + file.getName() + "' has been deleted from Directory '" + this.getName() + "'");
             return true;
         }
+
         return false;
     }
 
@@ -75,6 +79,7 @@ public class Directory extends File {
         if (hasCircleChain(file)) {
             throw new Exception("Circle Chain Exception");
         }
+
         File newFile = file.clone();
         files.add(newFile);
     }
@@ -83,6 +88,7 @@ public class Directory extends File {
         if (this == file) {
             return true;
         }
+
         if (file instanceof Directory) {
             boolean result;
             for (int i = 0; i < ((Directory)file).fileCount(); i++) {
@@ -92,6 +98,7 @@ public class Directory extends File {
                 }
             }
         }
+
         return false;
     }
 

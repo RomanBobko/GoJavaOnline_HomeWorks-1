@@ -16,4 +16,5 @@ public class Guitar extends MusicalInstrument {
     public void play(String notes) {
         System.out.println("Guitarist playing guitar on notes: '" + notes + "'");
     }
+
 }

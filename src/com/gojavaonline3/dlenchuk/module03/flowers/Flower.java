@@ -5,6 +5,7 @@ package com.gojavaonline3.dlenchuk.module03.flowers;
  *
  */
 public abstract class Flower {
+
     private final Color color;
     private final boolean smelled;
     private int height;
@@ -45,4 +46,5 @@ public abstract class Flower {
     public String toString() {
         return this.getClass().getSimpleName()+ '{' + color + ", " + height + ", " + (smelled ? "has smell" : "hasn't smell") + ", " + state + '}';
     }
+
 }

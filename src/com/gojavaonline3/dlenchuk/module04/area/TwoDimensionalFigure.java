@@ -14,4 +14,5 @@ public abstract class TwoDimensionalFigure {
     public void draw() {
         System.out.println("Draw " + this.toString() + ". Area is " + getArea());
     }
+
 }

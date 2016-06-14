@@ -11,12 +11,6 @@ import java.util.Map;
  */
 public class MusicStore {
 
-    /* ToDo
-     * Дима, ты говорил, что мы вернемся к этому классу, когда будем говорить об антипаттернах
-     * Разговор был о моих "минах"
-     * void checkXxxx() throws XxxxException
-    * */
-
     public enum Goods {
         GUITAR,
         PIANO,
@@ -48,6 +42,7 @@ public class MusicStore {
                 return i;
             }
         }
+
         return -1;
     }
 
@@ -61,7 +56,9 @@ public class MusicStore {
 
     public void report() {
         System.out.println(musicalInstruments.size() == 0 ? "The Music Store is empty." : "Reporting...");
+
         musicalInstruments.forEach(System.out::println);
+
         System.out.println("=============================================================================");
         System.out.println("Total count: " + totalCount() + "; Total amount: $" + totalAmount());
     }
@@ -72,22 +69,28 @@ public class MusicStore {
 
     public long totalAmount() {
         long result = 0;
+
         for (MusicalInstrument musicalInstrument : musicalInstruments) {
             result += musicalInstrument.getPrice();
-        }return result;
+        }
+
+        return result;
     }
 
     public void playAll(String notes) {
         System.out.println("Concert is started...");
+
         for (MusicalInstrument musicalInstrument : musicalInstruments) {
             musicalInstrument.play(notes);
         }
+
         System.out.println("Concert is finished...");
     }
 
     public List<MusicalInstrument> prepareInstruments(Map<String, Integer> order) throws GoodException {
         checkGoods(order);
         List<MusicalInstrument> resultList = new ArrayList<>();
+
         for (Map.Entry<String, Integer> entry : order.entrySet()) {
             if (entry.getValue() == 0) {
                 continue;
@@ -99,6 +102,7 @@ public class MusicStore {
                 if (musicalInstrument.getClass().getSimpleName().toLowerCase().equals(entry.getKey())) {
                     resultList.add(musicalInstrument);
                     iterator.remove();
+
                     if (++counter == entry.getValue()) {
                         break;
                     }
@@ -106,6 +110,7 @@ public class MusicStore {
             }
 
         }
+
         return resultList;
     }
 
@@ -119,12 +124,14 @@ public class MusicStore {
 
     private void checkValidNameOfGoodInOrder(Map.Entry<String, Integer> entry) throws GoodException {
         boolean goodExists = false;
+
         for (Goods good : Goods.values()) {
             if (good.name().toLowerCase().equals(entry.getKey())) {
                 goodExists = true;
                 break;
             }
         }
+
         if (!goodExists) {
             throw new GoodException(entry.getKey());
         }
@@ -138,6 +145,7 @@ public class MusicStore {
 
     private void checkCountOfGoodInTheMusicStore(Map.Entry<String, Integer> entry) throws NotEnoughGoodsExceptionInTheStore {
         int counter = 0;
+
         for (MusicalInstrument musicalInstrument : musicalInstruments) {
             if (musicalInstrument.getClass().getSimpleName().toLowerCase().equals(entry.getKey())) {
                 if (++counter == entry.getValue()) {
@@ -145,8 +153,10 @@ public class MusicStore {
                 }
             }
         }
+
         if (counter < entry.getValue()) {
             throw new NotEnoughGoodsExceptionInTheStore(entry.getKey(), entry.getValue(), counter);
         }
     }
+
 }

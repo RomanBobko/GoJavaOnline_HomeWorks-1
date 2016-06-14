@@ -5,6 +5,7 @@ package com.gojavaonline3.dlenchuk.module04.temperature;
  * Exception IllegalUnitOfTemperatureException
  */
 public class IllegalUnitOfTemperatureException extends TemperatureException {
+
     private final String unitName;
 
     public IllegalUnitOfTemperatureException(String unitName) {
@@ -14,4 +15,5 @@ public class IllegalUnitOfTemperatureException extends TemperatureException {
     public String getUnitName() {
         return unitName;
     }
+
 }

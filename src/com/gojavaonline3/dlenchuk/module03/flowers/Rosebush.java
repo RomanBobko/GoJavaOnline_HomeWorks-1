@@ -21,7 +21,7 @@ public class Rosebush {
     private final Color color;
     private final boolean smelled;
 
-    Rosebush(Color color, boolean smelled) {
+    public Rosebush(Color color, boolean smelled) {
         this.color = color;
         this.smelled = smelled;
     }
@@ -31,6 +31,7 @@ public class Rosebush {
             birth();
             return;
         }
+
         Iterator<Rose> iterator = roses.iterator();
         while (iterator.hasNext()) {
             Rose rose = iterator.next();
@@ -49,6 +50,7 @@ public class Rosebush {
                     iterator.remove();
             }
         }
+
     }
 
     public void birth() {

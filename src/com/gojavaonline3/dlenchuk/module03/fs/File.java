@@ -5,6 +5,7 @@ package com.gojavaonline3.dlenchuk.module03.fs;
  * Abstract Class File
  */
 public abstract class File implements Cloneable {
+
     private String name;
 
     File(String name) {

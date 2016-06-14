@@ -5,7 +5,9 @@ package com.gojavaonline3.dlenchuk.module03.flowers;
  *
  */
 public class Chamomile extends Flower {
+
     Chamomile(Color color, int height, boolean hasSmell, State state) {
         super(color, height, hasSmell, state);
     }
+
 }
