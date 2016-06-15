@@ -5,6 +5,7 @@ import java.util.Arrays;
 /**
  * Created by Dmitrij Lenchuk on 04.06.2016.
  * Class Simple Array List
+ * TO DO
  */
 public class SimpleArrayList<T extends Number & Comparable<T>> implements SimpleList<T> {
 
